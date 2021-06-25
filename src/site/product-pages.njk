@@ -1,0 +1,10 @@
+---
+pagination:
+  data: products
+  alias: item
+  size: 1
+permalink: "/product/{{ item.node.handle | slug }}/index.html"
+layout: layouts/base.njk
+---
+
+{% include "product_summary.njk" %}
