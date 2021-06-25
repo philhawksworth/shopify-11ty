@@ -1,0 +1,29 @@
+{
+  "name": "shopify-storefront-reference-with-eleventy",
+  "version": "0.1.2",
+  "description": "A reference site for exploring the Shopify storefront API with Eleventy ",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philhawksworth/11ty-with-serverless"
+  },
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "npm run dev",
+    "dev": "ntl dev"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "ssg",
+    "serverless",
+    "netlify"
+  ],
+  "author": "Phil Hawksworth <phil@netlify.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "node-fetch": "^2.6.1",
+    "sass": "^1.29.0"
+  }
+}
