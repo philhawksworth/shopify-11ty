@@ -1,6 +1,6 @@
 const fetch = require( 'node-fetch');
 const shopUrl = "https://netlify-demo.myshopify.com";
-const storefront_access_token = "b98313b8d60c1d61649070cc78cc41da"; // Safe to share on the wire. Not secret.
+const storefront_access_token = "b98313b8d60c1d61649070cc78cc41da"; // Safe to share. This is read-only. Not secret.
 
 // Assemble the graphql query to fetch info all teh products
 const query = `{
