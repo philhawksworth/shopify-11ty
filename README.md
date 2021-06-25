@@ -1,10 +1,14 @@
-# 11ty Scaffold with Serverless
+# Shopify Storefront reference with 11ty
 
-A starting point for an 11ty site. With:
+A reference site for exploring the Shopify storefront API with Eleventy
 
-- Nunjucks template inheritance
-- Sass pipeline with SCSS
-- Responsive breakpoints via mixins
-- Image passthrough without optimisation
-- 11ty data cascade with remote data request
-- Serverless functions pipeline with [Netlify Functions](https://netlify.com/functions)
+```
+# install the dependencies
+npm i
+
+# Run the local dev server during development
+netlify dev
+
+# Build the site
+npm run build
+```
