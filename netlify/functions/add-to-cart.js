@@ -12,10 +12,8 @@ exports.handler = async (event) => {
     quantity,
     merchandiseId
   } = querystring.parse(event.body);
-  
-  console.log( quantity, merchandiseId);
-  
 
+  // Add to a shopify cart (creating one if required)
   const response = await postToShopify({
     query: `mutation { createCart($cartInput: CartInput}) {
       cartCreate(input: $cartInput) {
@@ -65,7 +63,6 @@ exports.handler = async (event) => {
   });
 
   console.log(response);  
-
 
   // Shopify will create a new cart ID if required
   const cardId = "DUMMY"
