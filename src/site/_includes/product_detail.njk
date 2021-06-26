@@ -3,16 +3,15 @@
   <p>{{ item.node.description }}</p>
   <img src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}">
   
-  {% if item.node.totalInventory > 0  %}
-  <form action="/api/add/?productId={{ item.node.id }}" method="POST">
+
+  <form action="/api/add/" method="POST">
+    <select>
+    {% for variant in item.node.variants.edges %}
+      <option name="variant" value="{{ variant.node.id }}">{{ variant.node.title }} — {{ variant.node.priceV2.currencyCode }} {{ variant.node.priceV2.amount }}</option>
+    {% endfor %}
+    </select>
     <input type="number" name="quantity" value="1" />
     <!-- <input type="text" name="checkoutId" value="1" /> -->
-    <input type="submit">Add to basket</input>
+    <input type="submit" value="Add to basket">
   </form>
-  {% else %}
-    <p>Sold out</p>
-  {% endif %}
 </div>
-
-
-{{ item | dump }}

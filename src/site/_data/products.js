@@ -17,6 +17,10 @@ module.exports = async () => {
                   id
                   title
                   quantityAvailable
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
                 }
               }
             }
