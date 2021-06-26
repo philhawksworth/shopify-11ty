@@ -1,0 +1,18 @@
+<div class="product_summary">
+  <h1 href="/product/{{ item.node.handle }}">{{ item.node.title }}</h1>
+  <p>{{ item.node.description }}</p>
+  <img src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}">
+  
+  {% if item.node.totalInventory > 0  %}
+  <form action="/api/add/?productId={{ item.node.id }}" method="POST">
+    <input type="number" name="quantity" value="1" />
+    <!-- <input type="text" name="checkoutId" value="1" /> -->
+    <input type="submit">Add to basket</input>
+  </form>
+  {% else %}
+    <p>Sold out</p>
+  {% endif %}
+</div>
+
+
+{{ item | dump }}

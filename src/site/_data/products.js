@@ -11,7 +11,15 @@ module.exports = async () => {
             handle
             description
             title
-            totalInventory
+            variants(first: 5) {
+              edges {
+                node {
+                  id
+                  title
+                  quantityAvailable
+                }
+              }
+            }
             priceRange {
               maxVariantPrice {
                 amount
