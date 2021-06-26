@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1",
     "sass": "^1.29.0"
   }

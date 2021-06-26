@@ -1,5 +1,15 @@
 <div class="product_summary">
-  <a href="/product/{{ item.node.handle }}">{{ item.node.title }}</a>
+  <a href="/product/{{ item.node.handle }}">{{ item.node.title }}</a> - {{ item.node.priceRange.maxVariantPrice.amount }} ({{ item.node.priceRange.maxVariantPrice.currencyCode }})
   <p>{{ item.node.description }}</p>
   <img src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}">
+  <p>({{ item.node.totalInventory }} available)</p>
+  {% if item.node.totalInventory > 0  %}
+  <form action="/api/add/?productId={{ item.node.id }}" method="POST">
+    <input type="number" name="quantity" value="1" />
+    <!-- <input type="text" name="checkoutId" value="1" /> -->
+    <input type="submit">Add to basket</input>
+  </form>
+  {% else %}
+    <p>Sold out</p>
+  {% endif %}
 </div>
