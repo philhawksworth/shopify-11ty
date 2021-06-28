@@ -13,9 +13,12 @@ exports.handler = async (event) => {
     merchandiseId
   } = querystring.parse(event.body);
 
+  console.log(`Adding to cart: ${quantity}x ${merchandiseId}`);
+  
+
   // Add to a shopify cart (creating one if required)
   const response = await postToShopify({
-    query: `mutation { createCart($cartInput: CartInput}) {
+    query: `mutation createCart($cartInput: CartInput) {
       cartCreate(input: $cartInput) {
         cart {
           id
@@ -42,6 +45,18 @@ exports.handler = async (event) => {
               amount
               currencyCode
             }
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+            totalTaxAmount {
+              amount
+              currencyCode
+            }
+            totalDutyAmount {
+              amount
+              currencyCode
+            }
           }
         }
       }
@@ -50,7 +65,7 @@ exports.handler = async (event) => {
       "cartInput": {
         "lines" : [
           {
-            "quantity": "${quantity}",
+            "quantity": ${quantity},
             "merchandiseId": "${merchandiseId}"
           }
         ],

@@ -11,9 +11,9 @@ exports.postToShopify = async ({ query, variables }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query, variables }),
-    }).then(function(res) {
+    }).then(res => { 
       return res.json();
-    })
+    });
 
     if (!result || !result.data) {
       return false;
