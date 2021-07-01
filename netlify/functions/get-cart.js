@@ -21,7 +21,6 @@ const { postToShopify } = require('./utils/postToShopify')
 
 exports.handler = async (event) => {
   const { cartId } = JSON.parse(event.body)
-
   try {
     console.log('--------------------------------')
     console.log('Retrieving existing cart...')
