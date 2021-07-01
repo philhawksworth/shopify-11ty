@@ -1,24 +1,29 @@
-<div class="product_summary">
-  <h1 href="/product/{{ item.node.handle }}">{{ item.node.title }}</h1>
-  <p>{{ item.node.description }}</p>
-  <img src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}">
-  
-  <form class="addToCart">
-    
-    {# if there is more than one product variant, show options  #}
-    {% if (item.node.variants.edges.length > 1) %}
-    {% for variant in item.node.variants.edges %}
-    <input type="radio" id="{{ variant.node.id }}" name="merchandiseId" value="{{ variant.node.id }}" checked><label for="{{ variant.node.id }}">{{ variant.node.title }} - {{ variant.node.priceV2.currencyCode }} {{ variant.node.priceV2.amount }}</label>
-    {% endfor %}
-    {# Or else just show the one and only price #}
-    {% else %}
-    {{ item.node.variants.edges[0].node.priceV2.currencyCode }} {{ item.node.variants.edges[0].node.priceV2.amount }}
-    <input type="hidden" name="merchandiseId" value="{{ item.node.variants.edges[0].node.id }}" checked>
-    {% endif %}
-    <input type="number" name="quantity" value="1" />
-    <input type="hidden" name="cartId" value="" />
-    <input type="submit" value="Add to basket">
-  </form>
 
+
+<div class="product-page">
+  <div class="product-img">
+    <img src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}">
+  </div>
+  <div class="product-copy">
+    <h1>{{ item.node.title }}</h1>
+    <p>{{ item.node.description }}</p>
+    <form class="addToCart">
+      {# if there is more than one product variant, show options  #}
+      {% if (item.node.variants.edges.length > 1) %}
+      {% for variant in item.node.variants.edges %}
+      <div class="variant"> 
+        <input type="radio" id="{{ variant.node.id }}" name="merchandiseId" value="{{ variant.node.id }}" checked><label for="{{ variant.node.id }}">{{ variant.node.title }} - {{ variant.node.priceV2.currencyCode }} {{ variant.node.priceV2.amount }}</label>
+      </div>
+      {% endfor %}
+      {# Or else just show the one and only price #}
+      {% else %}
+      {{ item.node.variants.edges[0].node.priceV2.currencyCode }} {{ item.node.variants.edges[0].node.priceV2.amount }}
+      <input type="hidden" name="merchandiseId" value="{{ item.node.variants.edges[0].node.id }}" checked>
+      {% endif %}
+      <input type="number" name="quantity" value="1" />
+      <input type="hidden" name="cartId" value="" />
+      <input type="submit" value="Add to cart">
+    </form>
+  </div>
 </div>
 

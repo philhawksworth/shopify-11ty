@@ -4,15 +4,17 @@
   <title>{{ title }}</title>
 </head>
 <body>
-  <header>
-    <ul class="nav">
-      <li><a href="/">Browse the store</a></li>
-      <li><a href="/view-cart" class="cartLink">Cart</a></li>
-    </ul>
-  </header>
-  <div class="container">
+
+  <main>
+    <header>
+      <h1>Shoperoni</h1>
+      <h2>Shop for literally the best products in the world, right here.</h2>
+    </header>
+  
+    <a href="/cart" class="cart cartLink">Shopping Cart</a>
     {{ content | safe }}
-  </div>
-  <script src="/js/post-to-cart.js"></script>
+ 
+  </main>
+  <script src="/js/shopping-ui.js"></script>
 </body>
 </html>

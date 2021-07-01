@@ -1,6 +1,5 @@
 (function(){
 
-  
   getCartSummaryDetails();
   
   const forms = document.getElementsByClassName('addToCart');
@@ -31,8 +30,10 @@ function getCartSummaryDetails() {
 // Update the UI with latest cart info
 function displayCartSummaryDetails(count, id) {
   const cartLink = document.getElementsByClassName('cartLink')[0];
-  cartLink.innerHTML = `Cart (${count})`;
-  cartLink.href = `/cart/?cartId=${id}`;
+  if (cartLink) {
+    cartLink.innerHTML = `Shopping Cart (${count})`;
+    cartLink.href = `/cart/?cartId=${id}`;
+  }
 }
 
 

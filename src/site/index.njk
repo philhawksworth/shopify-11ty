@@ -3,12 +3,9 @@ title: Home
 layout: layouts/base.njk
 ---
 
-<h1>Shopify with 11ty</h1>
-<p>Create exactly the store experience you want thanks to the Shopify APIs</p>
-
-
-{% for item in products %}
-{% include "product_summary.njk" %}
-{% endfor %}
-
+<ul class="products">
+  {% for item in products %}
+  {% include "product_summary.njk" %}
+  {% endfor %}
+</ul>
 

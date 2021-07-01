@@ -3,8 +3,10 @@ const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
 
+  const rootURL = process.env.URL || "https://localhost:8888";
+
   const cartId = event.queryStringParameters.cartId;
-  const result = await fetch('http://localhost:8888/api/get-cart', {
+  const result = await fetch(`${rootURL}/api/get-cart`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,25 +49,20 @@ exports.handler = async (event) => {
     items += cartItem(result.cart.id, item.node)
   });
 
-  console.log(result.cart);
-
-
 
   const pageTemplate = (items, totals) => {return `
   <html>
-    <head>
-      <link rel="stylesheet" href="/css/main.css">
-      <title>Your Cart</title>
-    </head>
-    <body>
+  <head>
+  <link rel="stylesheet" href="/css/main.css">
+  <title>Your Cart</title>
+  </head>
+  <body>
+    <main>
       <header>
-        <ul class="nav">
-          <li><a href="/">Browse the store</a></li>
-          <li><a href="/view-cart" class="cartLink">Cart</a></li>
-        </ul>
+        <h1>Shoperoni</h1>
+        <h2>Shop for literally the best products in the world, right here.</h2>
       </header>
-      <div class="container">
-        
+      <a class="home" href="/">Go back</a>
       <table>
         <thead>
           <th>Item</th> 
@@ -77,13 +74,15 @@ exports.handler = async (event) => {
         <tbody>
         ${items}
         <tr>
+          <td></td>
+          <td></td>
           <td>Total</td>
           <td>${totals.amount} ${totals.currencyCode}</td>
         </tr>
         </tbody>
         </table>
-      </div>
-      <script src="/js/post-to-cart.js"></script>
+      </main>
+      <script src="/js/shopping-ui.js"></script>
     </body>
     </html>
     `};
