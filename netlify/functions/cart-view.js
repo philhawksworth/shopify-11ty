@@ -47,8 +47,11 @@ exports.handler = async (event) => {
     items += cartItem(result.cart.id, item.node)
   });
 
+  console.log(result.cart);
 
-  const pageTemplate = (data) => {return `
+
+
+  const pageTemplate = (items, totals) => {return `
   <html>
     <head>
       <link rel="stylesheet" href="/css/main.css">
@@ -72,7 +75,11 @@ exports.handler = async (event) => {
           <th></th>
         </thead>
         <tbody>
-        ${data}
+        ${items}
+        <tr>
+          <td>Total</td>
+          <td>${totals.amount} ${totals.currencyCode}</td>
+        </tr>
         </tbody>
         </table>
       </div>
@@ -83,7 +90,7 @@ exports.handler = async (event) => {
     
   return {
     statusCode: 200,
-    body: pageTemplate(items)
+    body: pageTemplate(items, result.cart.estimatedCost.totalAmount)
   };
 
 }
