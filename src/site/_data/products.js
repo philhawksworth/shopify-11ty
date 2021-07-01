@@ -1,4 +1,4 @@
-const { postToShopify } = require('../../utils/postToShopify');
+const { postToShopify } = require('../../../netlify/functions/utils/postToShopify');
 
 module.exports = async () => {
 

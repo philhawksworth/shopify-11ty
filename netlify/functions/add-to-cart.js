@@ -1,100 +1,79 @@
-const { postToShopify } = require('../../src/utils/postToShopify');
-const querystring = require('querystring');
+/**
+ * Add to Cart API Endpoint
+ *
+ * * Purpose: Add a single item to the cart
+ * @param {string} cartId (Optional)
+ * @param {string} itemId - Usually it's the product variant id
+ * @param {number} quantity - Minimum 1
+ *
+ * @returns {object} cart that contains lines of items inside
+ * See './utils/createCartWithItem' for the data structure
+ *
+ * Examples:
+ *
+ * If a cart does not exist yet,
+ * ```
+ * fetch('/.netlify/functions/add-to-cart', {
+ *   method: 'POST',
+ *   body: JSON.stringify({
+ *     cardId: '', // cardId can also be omitted if desired
+ *     itemId: 'Z2lkOi8vc2hvcGlmFyaWFudC8zOTc0NDEyMDEyNzY5NA==',
+ *     quantity: 4
+ *   })
+ * })
+ * ```
+ *
+ * Add item to an existing cart
+ * ```
+ * fetch('/.netlify/functions/add-to-cart', {
+ *   method: 'POST',
+ *   body: JSON.stringify({
+ *     cartId: 'S9Qcm9kdWN0VmFyaWFudC8zOTc0NDEyMDEyNzY5NA',
+ *     itemId: 'Z2lkOi8vc2hvcGlmFyaWFudC8zOTc0NDEyMDEyNzY5NA==',
+ *     quantity: 4
+ *   })
+ * })
+ * ```
+ */
 
+const { createCartWithItem } = require('./utils/createCartWithItem')
+const { addItemToCart } = require('./utils/addItemToCart')
 
 exports.handler = async (event) => {
-
-  // Parse the form submission
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
-  const {
-    quantity,
-    merchandiseId
-  } = querystring.parse(event.body);
-
-  console.log(`Adding to cart: ${quantity}x ${merchandiseId}`);
+  let { cartId, itemId, quantity } = JSON.parse(event.body)
+  quantity = parseInt(quantity);
   
 
-  // Add to a shopify cart (creating one if required)
-  const response = await postToShopify({
-    query: `mutation createCart($cartInput: CartInput) {
-      cartCreate(input: $cartInput) {
-        cart {
-          id
-          createdAt
-          updatedAt
-          lines(first:10) {
-            edges {
-              node {
-                id
-                merchandise {
-                  ... on ProductVariant {
-                    id
-                  }
-                }
-              }
-            }
-          }
-          attributes {
-            key
-            value
-          }
-          estimatedCost {
-            totalAmount {
-              amount
-              currencyCode
-            }
-            subtotalAmount {
-              amount
-              currencyCode
-            }
-            totalTaxAmount {
-              amount
-              currencyCode
-            }
-            totalDutyAmount {
-              amount
-              currencyCode
-            }
-          }
-        }
-      }
-    }`,
-    variables: `{
-      "cartInput": {
-        "lines" : [
-          {
-            "quantity": ${quantity},
-            "merchandiseId": "${merchandiseId}"
-          }
-        ],
-        "attributes": {
-          "key": "cart_attribute",
-          "value": "Some cart attribute"
-        }
-      }
-    }`
-  });
+  if (cartId) {
+    console.log('--------------------------------')
+    console.log('Adding item to existing cart...')
+    console.log('--------------------------------')
 
-  console.log(response);  
+    const shopifyResponse = await addItemToCart({
+      cartId,
+      itemId,
+      quantity,
+    })
 
-  // Shopify will create a new cart ID if required
-  const cardId = "DUMMY"
-
-  // Now that an item was added to the cart, take the user to it.
-  // We'll render this dynamically from a serverless function
-  return {
-    body: "",
-    statusCode: 302,
-    headers: {
-      Location: `/cart?cartId=${cardId}`,
+    return {
+      statusCode: 200,
+      body: JSON.stringify(shopifyResponse.cartLinesAdd.cart),
     }
-  };
+  } else {
+    console.log('--------------------------------')
+    console.log('Creating new cart with item...')
+    console.log('--------------------------------')
 
+    console.log(itemId, quantity);
+    
+    const createCartResponse = await createCartWithItem({
+      itemId,
+      quantity,
+    })
 
-};
-
-
-
-
+    return {
+      statusCode: 200,
+      body: JSON.stringify(createCartResponse.cartCreate.cart),
+    }
+  }
+}

@@ -7,12 +7,12 @@
   <header>
     <ul class="nav">
       <li><a href="/">Browse the store</a></li>
-      <li>View your cart</li>
-      <li>Checkout</li>
+      <li><a href="/view-cart" class="cartLink">Cart</a></li>
     </ul>
   </header>
   <div class="container">
     {{ content | safe }}
   </div>
+  <script src="/js/post-to-cart.js"></script>
 </body>
 </html>

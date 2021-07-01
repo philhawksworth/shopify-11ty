@@ -7,6 +7,11 @@ module.exports = (eleventyConfig) => {
   // pass files directly through to the output
   eleventyConfig.addPassthroughCopy("site/images");
 
+  eleventyConfig.addPassthroughCopy({
+    "src/js": "js"
+  });
+
+
   // watch the scss source files in case of need to regenerate
   eleventyConfig.addWatchTarget("src/scss/");
 
