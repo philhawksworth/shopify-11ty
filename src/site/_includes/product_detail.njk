@@ -13,7 +13,7 @@
     {# Or else just show the one and only price #}
     {% else %}
     {{ item.node.variants.edges[0].node.priceV2.currencyCode }} {{ item.node.variants.edges[0].node.priceV2.amount }}
-    <input type="hidden" id="{{ variant.node.id }}" name="merchandiseId" value="{{ variant.node.id }}" checked>
+    <input type="hidden" name="merchandiseId" value="{{ item.node.variants.edges[0].node.id }}" checked>
     {% endif %}
     <input type="number" name="quantity" value="1" />
     <input type="hidden" name="cartId" value="" />

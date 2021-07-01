@@ -1,5 +1,6 @@
 (function(){
 
+  
   getCartSummaryDetails();
   
   const forms = document.getElementsByClassName('addToCart');
@@ -20,11 +21,11 @@ function getCartSummaryDetails() {
     postData('/api/get-cart', {
       'cartId': localStorage.getItem('shopifyCartId')
     })
-    .then(data => {
+    .then(data => {  
 
       console.log(data);
       
-      displayCartSummaryDetails(data.cart.lines.edges.length, data.id);
+      displayCartSummaryDetails(data.cart.lines.edges.length, data.cart.id);
     });
   }
 }
@@ -33,6 +34,8 @@ function getCartSummaryDetails() {
 function displayCartSummaryDetails(count, id) {
   const cartLink = document.getElementsByClassName('cartLink')[0];
   cartLink.innerHTML = `Cart (${count})`;
+
+  cartLink.href = `/cart/?cartId=${id}`;
 }
 
 
