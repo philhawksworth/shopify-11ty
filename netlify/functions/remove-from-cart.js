@@ -18,10 +18,14 @@
  */
 
 const { removeItemFromCart } = require('./utils/removeItemFromCart')
+const querystring = require("querystring");
 
 exports.handler = async (event) => {
-  const { cartId, lineId } = JSON.parse(event.body)
-
+  
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+  const { cartId, lineId } = querystring.parse(event.body)
   try {
     console.log('--------------------------------')
     console.log('Removing item from cart...')
@@ -31,10 +35,18 @@ exports.handler = async (event) => {
       lineId,
     })
 
+    // return {
+    //   statusCode: 200,
+    //   body: JSON.stringify(shopifyResponse.cartLinesRemove.cart),
+    // }
+
     return {
-      statusCode: 200,
-      body: JSON.stringify(shopifyResponse.cartLinesRemove.cart),
+      statusCode: 302,
+      headers: {
+        Location: `/cart/?cartId=${cartId}`,
+      },
     }
+
   } catch (error) {
     console.log(error)
   }
