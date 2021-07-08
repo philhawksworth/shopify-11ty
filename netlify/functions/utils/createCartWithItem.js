@@ -7,7 +7,7 @@ exports.createCartWithItem = async ({ itemId, quantity }) => {
       query: `
         mutation createCart($cartInput: CartInput) {
           cartCreate(input: $cartInput) {
-            cart {
+             cart {
               id
               createdAt
               updatedAt

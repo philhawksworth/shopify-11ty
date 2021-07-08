@@ -20,7 +20,7 @@
 const { postToShopify } = require('./utils/postToShopify')
 
 exports.handler = async (event) => {
-  const { cartId } = JSON.parse(event.body)
+  const { cartId } = JSON.parse(event.body);
   try {
     console.log('--------------------------------')
     console.log('Retrieving existing cart...')
@@ -46,6 +46,14 @@ exports.handler = async (event) => {
                       product {
                         title
                         handle
+                        images(first: 1) {
+                          edges {
+                            node {
+                              src
+                              altText
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -77,7 +85,6 @@ exports.handler = async (event) => {
         cartId,
       },
     })
-
     return {
       statusCode: 200,
       body: JSON.stringify(shopifyResponse),

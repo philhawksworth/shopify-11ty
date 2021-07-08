@@ -21,8 +21,16 @@ function getCartSummaryDetails() {
       'cartId': localStorage.getItem('shopifyCartId')
     })
     .then(data => { 
-      displayCartSummaryDetails(data.cart.lines.edges.length, data.cart.id);
+      if(data.cart) {
+        displayCartSummaryDetails(data.cart.lines.edges.length, data.cart.id);
+      }
+      else {
+        //clear a local cart if it has expired with Shopify
+        localStorage.removeItem('shopifyCartId');
+      }
     });
+  } else {
+    console.log(`No shopping cart yet`);
   }
 }
 

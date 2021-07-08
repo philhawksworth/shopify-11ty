@@ -49,10 +49,6 @@ module.exports = async () => {
     variables: null
   });
 
-
-  console.log(response);
-  
-
   return response.products.edges;
 
 };
