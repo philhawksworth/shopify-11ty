@@ -65,6 +65,10 @@ async function postData(url = '', data = {}) {
 function postToCart(event) {
   event.preventDefault();
   const inputs = event.target.elements; 
+
+console.log(inputs);
+
+
   const data = {
     cartId: inputs['cartId'].value || null,
     itemId: inputs['merchandiseId'].value,
