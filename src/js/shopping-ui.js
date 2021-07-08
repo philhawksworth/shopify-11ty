@@ -66,10 +66,14 @@ function postToCart(event) {
   event.preventDefault();
   const inputs = event.target.elements; 
   const data = {
-    cartId: inputs['cartId'].value,
+    cartId: inputs['cartId'].value || null,
     itemId: inputs['merchandiseId'].value,
     quantity: inputs['quantity'].value,
   };
+
+  console.log(data);
+
+
   postData('/api/add-to-cart', data)
   .then(data => {
     // persist that cartId for subsequent actions
