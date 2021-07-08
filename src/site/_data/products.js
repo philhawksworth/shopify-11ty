@@ -50,11 +50,7 @@ module.exports = async () => {
     }`,
     variables: null
   });
-
-
-  console.log(response.products.edges);
   
-
   return response.products.edges;
 
 };
