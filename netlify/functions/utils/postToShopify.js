@@ -1,5 +1,7 @@
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 
+
+require('dotenv').config();
 exports.postToShopify = async ({ query, variables }) => {
   try {
     const result = await fetch(process.env.SHOPIFY_API_ENDPOINT, {
