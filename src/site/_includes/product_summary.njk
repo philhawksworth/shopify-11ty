@@ -1,11 +1,14 @@
-<li class="product">
+<div class="product-card">
+  <div class="product-card-frame">
+      <a href="/product/{{ item.node.handle }}">
+      <img class="prodimg" src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}" />
+    </a>
+  </div>
+  <div class="product-card-text">
+    <h3 class="product-card-title">{{ item.node.title }}</h3>
+    <p class="product-card-description">{{ item.node.description | truncate(60) }}</p>
+  </div>
   <a href="/product/{{ item.node.handle }}">
-    <div class="frame">
-      <img class="prodimg" src="{{item.node.images.edges[0].node.src }}" alt="{{ item.node.images.edges[0].node.alt }}"" />
-    </div>
-    <h2>{{ item.node.title }}</h2>
-    <p>{{ item.node.description | truncate(60) }}</p>
+    <button>View Item ></button>
   </a>
-</li>
-
-
+</div>

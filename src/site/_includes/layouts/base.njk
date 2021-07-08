@@ -5,16 +5,75 @@
 </head>
 <body>
 
+  <header class="app-header">
+    <h1>Shoperoni</h1>
+    <nav class="main-nav">
+      <ul>
+        <li class="main-nav-item">
+          <a href="/">All<a>
+        </li>
+        <li class="main-nav-item">
+          <a href="/?type=cheese">Cheeses<a>
+        </li>
+        <li class="main-nav-item">
+          <a href="/?type=meat">Meats<a>
+        </li>
+        <li class="main-nav-item">
+          <a href="/?type=boards">Boards<a>
+        </li>
+        <li class="main-nav-item">
+          <div class="cart-size"></div>
+          <a href="/cart" class="cart cartLink">Shopping Cart</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
   <main>
-    <header>
-      <h1>Shoperoni</h1>
-      <h2>Shop for literally the best products in the world, right here.</h2>
-    </header>
-  
-    <a href="/cart" class="cart cartLink">Shopping Cart</a>
     {{ content | safe }}
- 
   </main>
+  <footer>
+    <section class="testimonial">
+      <h2>
+        "The interplay of flavors between the cheese, meats and fruits is an
+        absolute delight."
+      </h2>
+      <p>Paul Hotcakes</p>
+    </section>
+    <section class="app-footer-links">
+      <ul>
+        <li>About</li>
+        <li>Company</li>
+        <li>Locations</li>
+        <li>Contact</li>
+        <li>Hours</li>
+      </ul>
+      <ul>
+        <li>Twitter</li>
+        <li>Facebook</li>
+        <li>Instagram</li>
+        <li>LinkedIn</li>
+      </ul>
+      <div class="newsletter">
+        <h2 class="newsletter-title">Sign up for our newsletter:</h2>
+        <input
+          class="newsletter-input"
+          type="email"
+          placeholder="Enter your email"
+        />
+      </div>
+    </section>
+
+    <div class="project-credit">
+      <p>
+        This project is
+        <a href="https://github.com/philhawksworth/shopify-11ty">open source on GitHub </a>,
+        hosted with <a href="https://bit.ly/2G29YwK">Netlify</a>, built with
+        <a href="https://11ty.dev/">Eleventy</a>
+        and made with 💚 by Phil Hawksworth (<a href="https://twitter.com/philhawksworth">@philhawksworth</a>)
+      </p>
+    </div>
+  </footer>
   <script src="/js/shopping-ui.js"></script>
 </body>
 </html>

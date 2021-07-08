@@ -5,10 +5,9 @@ const fs = require("fs-extra");
 module.exports = (eleventyConfig) => {
 
   // pass files directly through to the output
-  eleventyConfig.addPassthroughCopy("site/images");
-
   eleventyConfig.addPassthroughCopy({
-    "src/js": "js"
+    "src/js": "js",
+    "src/site/images" : "images"
   });
 
 

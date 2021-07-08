@@ -38,9 +38,12 @@ function getCartSummaryDetails() {
 // Update the UI with latest cart info
 function displayCartSummaryDetails(count, id) {
   const cartLink = document.getElementsByClassName('cartLink')[0];
+  const cartSize = document.getElementsByClassName('cart-size')[0];
   if (cartLink) {
-    cartLink.innerHTML = `Shopping Cart (${count})`;
     cartLink.href = `/cart/?cartId=${id}`;
+  }
+  if (cartSize) {
+    cartSize.innerHTML = `${count}`;
   }
 }
 
