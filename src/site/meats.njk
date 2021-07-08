@@ -1,0 +1,12 @@
+---
+title: Meats
+layout: layouts/base.njk
+---
+
+<ul class="product-grid">
+  {% for item in products %}
+  {% if ( item.node.productType == "meat") %}
+    {% include "product_summary.njk" %}
+  {% endif %}
+  {% endfor %}
+</ul>

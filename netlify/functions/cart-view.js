@@ -73,13 +73,13 @@ exports.handler = async (event) => {
             <a href="/">All<a>
           </li>
           <li class="main-nav-item">
-            <a href="/?type=cheese">Cheeses<a>
+            <a href="/cheeses">Cheeses<a>
           </li>
           <li class="main-nav-item">
-            <a href="/?type=meat">Meats<a>
+            <a href="/meats">Meats<a>
           </li>
           <li class="main-nav-item">
-            <a href="/?type=boards">Boards<a>
+            <a href="/boards">Boards<a>
           </li>
           <li class="main-nav-item">
             <div class="cart-size"></div>

@@ -11,6 +11,8 @@ module.exports = async () => {
             handle
             description
             title
+            productType
+            totalInventory
             variants(first: 5) {
               edges {
                 node {
@@ -48,6 +50,10 @@ module.exports = async () => {
     }`,
     variables: null
   });
+
+
+  console.log(response.products.edges);
+  
 
   return response.products.edges;
 
