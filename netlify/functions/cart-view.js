@@ -51,10 +51,42 @@ exports.handler = async (event) => {
   </tr>
 `};
   
+  const cartTotals = (cart) => {
+    
+    console.log({cart});
+    
+    if (!cart.lines.edges.length) {
+      console.log(`No basket`);
+      return `<div class="cart-total-column"><a href="/">What you need is some meats and cheeses!</a></div>`;
+    }
+
+
+    return `
+    <div class="cart-total-column">
+      <p>
+        <strong>Subtotal:</strong>
+      </p>
+      <p>Shipping:</p>
+      <p>Tax:</p>
+      <p>Total:</p>
+    </div>
+    <div class="cart-total-column">
+      <p>
+        <strong>${cart.estimatedCost.subtotalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </strong>
+      </p>
+      <p>Free Shipping</p>
+      <p>${cart.estimatedCost.totalTaxAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
+      <p>${cart.estimatedCost.totalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
+    </div>`;
+  }
+
+  
   let items = "";
     result.cart.lines.edges.forEach(item => {
     items += cartItem(result.cart.id, item.node)
   });
+
+  
 
 
   const pageTemplate = (items, totals) => {return `
@@ -103,29 +135,11 @@ exports.handler = async (event) => {
         </thead>
         <tbody>
         ${items}
-        
         </tbody>
         </table>
         <section class="cart-total">
-        <div class="cart-total-content">
-          <div class="cart-total-column">
-            <p>
-              <strong>Subtotal:</strong>
-            </p>
-            <p>Shipping:</p>
-            <p>Tax:</p>
-            <p>Total:</p>
-          </div>
-          <div class="cart-total-column">
-            <p>
-              <strong>${totals.subtotalAmount.amount} ${totals.totalAmount.currencyCode} </strong>
-            </p>
-            <p>Free Shipping</p>
-            <p>${totals.totalTaxAmount.amount} ${totals.totalAmount.currencyCode} </p>
-            <p>${totals.totalAmount.amount} ${totals.totalAmount.currencyCode} </p>
-          </div>
-        </div>
-      </section>
+        ${cartTotals(result.cart)}
+        </section>
         </div>
       </article>
     </div>
@@ -168,7 +182,7 @@ exports.handler = async (event) => {
           <a href="https://github.com/philhawksworth/shopify-11ty">open source on GitHub </a>,
           hosted with <a href="https://bit.ly/2G29YwK">Netlify</a>, built with
           <a href="https://11ty.dev/">Eleventy</a>
-          and made with 💚 by Phil Hawksworth (<a href="https://twitter.com/philhawksworth">@philhawksworth</a>)
+          and made by Phil Hawksworth (<a href="https://twitter.com/philhawksworth">@philhawksworth</a>)
         </p>
       </div>
     </footer>
