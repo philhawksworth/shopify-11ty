@@ -53,30 +53,33 @@ exports.handler = async (event) => {
   
   const cartTotals = (cart) => {
     
-    console.log({cart});
-    
     if (!cart.lines.edges.length) {
       console.log(`No basket`);
-      return `<div class="cart-total-column"><a href="/">What you need is some meats and cheeses!</a></div>`;
+      return `<div class="cart-total-content">
+        <div class="cart-total-column">
+          <a href="/">What you need is some meats and cheeses!</a>
+        </div>
+      </div>`;
     }
 
-
     return `
-    <div class="cart-total-column">
-      <p>
-        <strong>Subtotal:</strong>
-      </p>
-      <p>Shipping:</p>
-      <p>Tax:</p>
-      <p>Total:</p>
-    </div>
-    <div class="cart-total-column">
-      <p>
-        <strong>${cart.estimatedCost.subtotalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </strong>
-      </p>
-      <p>Free Shipping</p>
-      <p>${cart.estimatedCost.totalTaxAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
-      <p>${cart.estimatedCost.totalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
+    <div class="cart-total-content">
+      <div class="cart-total-column">
+        <p>
+          <strong>Subtotal:</strong>
+        </p>
+        <p>Shipping:</p>
+        <p>Tax:</p>
+        <p>Total:</p>
+      </div>
+      <div class="cart-total-column">
+        <p>
+          <strong>${cart.estimatedCost.subtotalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </strong>
+        </p>
+        <p>Free Shipping</p>
+        <p>${cart.estimatedCost.totalTaxAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
+        <p>${cart.estimatedCost.totalAmount.amount} ${cart.estimatedCost.totalAmount.currencyCode} </p>
+      </div>
     </div>`;
   }
 
