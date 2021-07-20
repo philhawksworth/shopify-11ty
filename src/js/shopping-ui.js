@@ -65,18 +65,11 @@ async function postData(url = '', data = {}) {
 function postToCart(event) {
   event.preventDefault();
   const inputs = event.target.elements; 
-
-console.log(inputs);
-
-
   const data = {
     cartId: inputs['cartId'].value == "undefined" ? null : inputs['cartId'].value,
     itemId: inputs['merchandiseId'].value,
     quantity: inputs['quantity'].value,
   };
-
-  console.log(data);
-
 
   postData('/api/add-to-cart', data)
   .then(data => {
